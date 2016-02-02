@@ -1,6 +1,4 @@
 library("samr")
-# Let's say I want to edit this. 
-# Another edit here. 
 
 ###---------- Getting SULT2B1b expression ----------###
 
@@ -26,13 +24,14 @@ table(sult2b1b.grp) # 352 zero vs. 47 nonzero
 
 ###---------- Getting filtered dataset ----------###
 
-setwd("/Users/fayezheng/Dropbox/Faye/GitHub/Ratliff_Prostate")
+#setwd("/Users/fayezheng/Dropbox/Faye/GitHub/Ratliff_Prostate")
 
 # Read in the dataset, already filtered to remove low-count genes, including SULT2B1b
 d <- read.table("prostatedata.txt")
 
 samfit <- SAMseq(x=d, y=sult2b1b, resp.type="Quantitative", geneid=rownames(d))
-samfit <- res
+
+save(samfit, file="samfit.RData")
 
 # Examine significant gene list
 #print(samfit)

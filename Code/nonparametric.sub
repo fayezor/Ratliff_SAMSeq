@@ -1,0 +1,13 @@
+#!/bin/bash
+# FILENAME: nonparametric.sub
+
+#PBS -q workq
+#PBS -l nodes=1:ppn=1,walltime=01:00:00
+#PBS -m bea
+#PBS -M zheng64@purdue.edu
+
+module load r/3.2.2
+
+cd $PBS_O_WORKDIR
+
+R CMD BATCH nonparametric_test.R nonparametric_test.Rout
