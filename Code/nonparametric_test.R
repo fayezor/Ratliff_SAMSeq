@@ -33,7 +33,7 @@ samfit <- SAMseq(x=d, y=sult2b1b, resp.type="Quantitative", geneid=rownames(d))
 
 genes.up <- samfit$siggenes.table$genes.up
 genes.lo <- samfit$siggenes.table$genes.lo
-sig.genes <- rbind(genes.up, genes.lo)[,-1]
+sig.genes <- rbind(genes.lo, genes.up)[,-1]
 rownames(sig.genes) <- NULL
 
 save(samfit, file="Results/samfit.RData")
@@ -45,3 +45,11 @@ write.table(sig.genes, file="Results/siggenes.txt", row.names=FALSE)
 
 # Plot results
 #plot(samfit)
+
+# Get a few top sig.genes to get a closer look at their histograms
+sig.genes <- as.data.frame(sig.genes)
+names(sig.genes) <- c("Gene", "Score", "q-value")
+
+# Check out the Spearman's correlation between the top genes and sult2b1b. Note that this is the unsampled version
+gene <- as.numeric(d[rownames(d)== sig.genes$Gene[1000],])
+cor(gene, sult2b1b, method="spearman")
