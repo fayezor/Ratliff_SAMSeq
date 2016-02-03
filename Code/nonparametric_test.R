@@ -2,7 +2,7 @@ library("samr")
 
 ###---------- Getting SULT2B1b expression ----------###
 
-d.full <- read.csv("GeneCountMatrix.AllBatches_withannot_.csv")
+d.full <- read.csv("Data/GeneCountMatrix.AllBatches_withannot_.csv")
 rownames(d.full) <- d.full[,1]
 d.full <- d.full[,-c(1,2)]
 samples.full <- names(d.full)
@@ -27,11 +27,11 @@ table(sult2b1b.grp) # 352 zero vs. 47 nonzero
 #setwd("/Users/fayezheng/Dropbox/Faye/GitHub/Ratliff_Prostate")
 
 # Read in the dataset, already filtered to remove low-count genes, including SULT2B1b
-d <- read.table("prostatedata.txt")
+d <- read.table("Data/prostatedata.txt")
 
 samfit <- SAMseq(x=d, y=sult2b1b, resp.type="Quantitative", geneid=rownames(d))
 
-save(samfit, file="samfit.RData")
+save(samfit, file="Results/samfit.RData")
 
 # Examine significant gene list
 #print(samfit)
