@@ -31,7 +31,14 @@ d <- read.table("Data/prostatedata.txt")
 
 samfit <- SAMseq(x=d, y=sult2b1b, resp.type="Quantitative", geneid=rownames(d))
 
+genes.up <- samfit$siggenes.table$genes.up
+genes.lo <- samfit$siggenes.table$genes.lo
+sig.genes <- rbind(genes.up, genes.lo)[,-1]
+rownames(sig.genes) <- NULL
+
 save(samfit, file="Results/samfit.RData")
+save(sig.genes, file="Results/siggenes.RData")
+write.table(sig.genes, file="Results/siggenes.txt", row.names=FALSE)
 
 # Examine significant gene list
 #print(samfit)
